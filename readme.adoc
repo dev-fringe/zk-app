@@ -1,1 +1,1 @@
-zookeeper based load balencer
+zookeeper based load balencer and config
