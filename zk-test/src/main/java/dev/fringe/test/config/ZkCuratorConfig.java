@@ -3,6 +3,7 @@ package dev.fringe.test.config;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.retry.ExponentialBackoffRetry;
+import org.apache.curator.retry.RetryNTimes;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -19,5 +20,12 @@ public class ZkCuratorConfig {
 		curatorFramework.start();
 		return curatorFramework;
 	}
-
+	
+	@Bean
+	public CuratorFramework curatorRetry() {
+	    CuratorFramework curatorFramework = CuratorFrameworkFactory.newClient(CONNECTION_STR, new RetryNTimes(5, 10000));
+	    curatorFramework.start();
+		return curatorFramework;
+	}
+	
 }
