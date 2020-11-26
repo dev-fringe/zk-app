@@ -7,23 +7,23 @@ import org.apache.curator.retry.RetryNTimes;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import lombok.val;
+
 @Configuration
 public class ZkCuratorConfig {
 
-	
 	private static String CONNECTION_STR = "127.0.0.1:2183,127.0.0.1:2182,127.0.0.1:2181";
-	private static String NAMESPACE = "curator";
 	
 	@Bean
 	public CuratorFramework curator() {
-		CuratorFramework curatorFramework = CuratorFrameworkFactory.builder().connectString(CONNECTION_STR).retryPolicy(new ExponentialBackoffRetry(1000, 3)).namespace(NAMESPACE).build();
+		val curatorFramework = CuratorFrameworkFactory.builder().connectString(CONNECTION_STR).retryPolicy(new ExponentialBackoffRetry(1000,3)).build();
 		curatorFramework.start();
-		return curatorFramework;
+	    return curatorFramework;
 	}
 	
 	@Bean
 	public CuratorFramework curatorRetry() {
-	    CuratorFramework curatorFramework = CuratorFrameworkFactory.newClient(CONNECTION_STR, new RetryNTimes(5, 10000));
+		val curatorFramework = CuratorFrameworkFactory.newClient(CONNECTION_STR, new RetryNTimes(5, 10000));
 	    curatorFramework.start();
 		return curatorFramework;
 	}
