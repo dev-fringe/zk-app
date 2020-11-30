@@ -47,6 +47,9 @@
 	    <artifactId>commons-logging</artifactId>
 	    <version>1.2</version>
 	</dependency>
-	
+	<dependency>
+	    <groupId>javax.annotation</groupId>
+	    <artifactId>javax.annotation-api</artifactId>
+	</dependency>
   </dependencies>  
 </project>
